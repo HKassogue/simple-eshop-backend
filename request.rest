@@ -1,0 +1,35 @@
+
+POST http://localhost:8000/produits
+Content-Type: application/json
+
+{
+    "nom": "Appareil photo", 
+    "categorie": "Electro", 
+    "prix": 35000, 
+    "photo": "product-1.jpg",
+    "description": "L'appareil photo Canon... Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, nostrum ipsum ea iusto porro quae dolore est cumque minima voluptas assumenda modi ex inventore repellendus! Quae nobis eius at nostrum!"
+}
+
+
+###
+GET http://localhost:8000/produits
+
+
+###
+GET http://localhost:8000/produits/1
+
+
+###
+PUT http://localhost:8000/produits/1
+Content-Type: application/json
+
+{
+    "nom": "Appareil photo Canon", 
+    "categorie": "Electronique", 
+    "prix": 35000, 
+    "photo": "product-1.jpg",
+    "description": "L'appareil photo Canon... Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, nostrum ipsum ea iusto porro quae dolore est cumque minima voluptas assumenda modi ex inventore repellendus! Quae nobis eius at nostrum!"
+}
+
+###
+DELETE  http://localhost:8000/produits/1
