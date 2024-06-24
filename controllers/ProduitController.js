@@ -11,25 +11,34 @@ export default class ProduitController {
      */
     if (Object.values(data).some((value) => !!value)) {
       try {
-        const { nom, categorie, prix, photo, description } = data;
-        const produit = await this.prisma.produit.findMany({
+        const { id, nom } = data;
+        const produit = id ? await this.prisma.produit.findFirst({
+          where: {
+            OR: [
+              {
+                id: {
+                  equals: Number(id),
+                }
+              },
+              {
+                nom: {
+                  equals: nom,
+                },
+              }
+            ]
+          },
+        }) : await this.prisma.produit.findFirst({
           where: {
             nom: nom,
           },
         });
-        if (produit.length > 0) {
+        if (produit) {
           res
             .status(200)
             .json({ status: false, msg: "Ce produit existe déjà" });
         } else {
           const newProduit = await this.prisma.produit.create({
-            data: {
-              nom,
-              categorie,
-              prix,
-              photo,
-              description,
-            },
+            data: data,
           });
           res.status(200).json({
             status: true,
@@ -62,18 +71,11 @@ export default class ProduitController {
           },
         });
         if (produit) {
-          const { nom, categorie, prix, photo, description } = data;
           const updatedProduit = await this.prisma.produit.update({
             where: {
               id: Number(id),
             },
-            data: {
-              nom: nom,
-              categorie: categorie,
-              prix: prix,
-              photo: photo,
-              description: description,
-            },
+            data: data
           });
           res.status(200).json({
             status: true,
