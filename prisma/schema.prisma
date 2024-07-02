@@ -18,7 +18,7 @@ model User {
   email          String           @unique
   username       String?          @unique
   firstname      String?
-  lasttname      String?
+  lastname      String?
   avatar         String?
   password       String
   createdAt      DateTime         @default(now())
@@ -39,6 +39,7 @@ model Produit {
 
 model Commande {
   id             Int              @id @default(autoincrement())
+  num            String?           @unique
   userId         Int
   total          Decimal?         @db.Decimal(9, 2)
   status         String?
